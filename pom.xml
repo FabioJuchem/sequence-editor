@@ -21,6 +21,8 @@
 
 	<modules>
 		<module>appmain</module>
+		<module>common</module>
+		<module>processor-api</module>
 	</modules>
 
 	<packaging>pom</packaging>

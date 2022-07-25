@@ -8,25 +8,10 @@
 		<version>0.0.0.1</version>
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
-
-	<artifactId>appmain</artifactId>
+	<groupId>com.fabiojuchem</groupId>
+	<artifactId>processor-api</artifactId>
 	<version>0.0.0.1</version>
-	<name>appmain</name>
+	<name>processor-api</name>
 	<description>Demo project for Spring Boot</description>
-
-	<dependencies>
-		<dependency>
-			<groupId>com.fabiojuchem</groupId>
-			<artifactId>common</artifactId>
-			<version>0.0.0.1</version>
-		</dependency>
-
-		<dependency>
-			<groupId>com.fabiojuchem</groupId>
-			<artifactId>processor-api</artifactId>
-			<version>0.0.0.1</version>
-		</dependency>
-	</dependencies>
-
 
 </project>
