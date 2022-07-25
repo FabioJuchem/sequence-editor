@@ -23,6 +23,7 @@
 		<module>appmain</module>
 		<module>common</module>
 		<module>processor-api</module>
+		<module>auth-api</module>
 	</modules>
 
 	<packaging>pom</packaging>
