@@ -15,4 +15,6 @@ spring:
     change-log: classpath:liquibase/changelog.yaml
 
 server:
+  servlet:
+    context-path: /api/v1
   port: 8080

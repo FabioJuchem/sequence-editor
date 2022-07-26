@@ -1,57 +1,48 @@
 package com.fabiojuchem.authapi.infrastructure.rest
 
-import org.springframework.stereotype.Component
-import org.springframework.web.server.ServerWebExchange
-import org.springframework.web.server.WebFilterChain
-import reactor.core.publisher.Mono
-import com.auth0.jwt.exceptions.JWTCreationException
-
-import com.auth0.jwt.JWT
-import com.auth0.jwt.algorithms.Algorithm
-import org.springframework.boot.web.servlet.DispatcherType
+import com.fabiojuchem.authapi.domain.token.TokenBuilder
+import com.fabiojuchem.authapi.domain.token.repository.TokenRepository
 import org.springframework.core.annotation.Order
-import org.springframework.web.server.WebFilter
+import org.springframework.stereotype.Component
+import reactor.core.publisher.Mono
+import reactor.util.context.Context
+import java.util.*
 import javax.servlet.Filter
 import javax.servlet.FilterChain
 import javax.servlet.ServletRequest
 import javax.servlet.ServletResponse
-import java.util.Enumeration
-
 import javax.servlet.http.HttpServletRequest
 
-import javax.servlet.http.HttpServletResponse
+const val USER_LOGGED_IN = "userLoggedIn"
 
 
 @Component
 @Order(-100)
-class AuthenticationWebFilter: Filter {
+class AuthenticationWebFilter(
+        private val tokenRepository: TokenRepository
+): Filter {
 
     // TODO Adicionar verificação de token
     override fun doFilter(request: ServletRequest?, response: ServletResponse?, chain: FilterChain?) {
-        val request = request as HttpServletRequest
-        val httpRequest = request
-        val headerNames = httpRequest.headerNames
+        Mono.justOrEmpty(request)
+                .contextWrite {
+                    val request = request as HttpServletRequest
+                    if (request.headerNames.toList().contains("Authorization")) {
+                       checkUserLoggedIn(it, request.getHeader("Authorization"))
+                    } else {
+                        it
+                    }
+                }
 
-        if (headerNames != null) {
-            while (headerNames.hasMoreElements()) {
-                val name = headerNames.nextElement()
-                println("Header: " + name + " value:" + httpRequest.getHeader(name))
-            }
-        }
     }
 
-    // TODO Exemplo de codificação de token
-    fun applyFilter() {
-        try {
-            val algorithm: Algorithm = Algorithm.HMAC256("secret")
-            val token = JWT.create()
-                    .withIssuer("auth0")
-                    .sign(algorithm)
-        } catch (exception: JWTCreationException) {
-            //Invalid Signing configuration / Couldn't convert Claims.
-        }
+    private fun checkUserLoggedIn(context: Context, headerValue: String): Context {
+        val credentials =  headerValue.split(" ")[1]
+        val decodedBytes: ByteArray = Base64.getDecoder().decode(credentials)
+        val decodedString = String(decodedBytes)
+        val token = TokenBuilder.hashSecret(decodedString.split(":")[1])
+        val tokenFetched = tokenRepository.findByToken(token)
+        return tokenFetched?.let { context.put(USER_LOGGED_IN, it.user) } ?: context
+
     }
-
-
-
 }
