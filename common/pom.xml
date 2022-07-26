@@ -6,7 +6,7 @@
 		<groupId>com.fabiojuchem</groupId>
 		<artifactId>sequence-editor</artifactId>
 		<version>0.0.0.1</version>
-		<relativePath/> <!-- lookup parent from repository -->
+		<relativePath>../../sequence-editor</relativePath>
 	</parent>
 
 	<artifactId>common</artifactId>
