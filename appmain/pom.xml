@@ -6,7 +6,7 @@
 		<groupId>com.fabiojuchem</groupId>
 		<artifactId>sequence-editor</artifactId>
 		<version>0.0.0.1</version>
-		<relativePath/> <!-- lookup parent from repository -->
+		<relativePath>../../sequence-editor</relativePath>
 	</parent>
 
 	<artifactId>appmain</artifactId>
@@ -24,6 +24,12 @@
 		<dependency>
 			<groupId>com.fabiojuchem</groupId>
 			<artifactId>processor-api</artifactId>
+			<version>0.0.0.1</version>
+		</dependency>
+
+		<dependency>
+			<groupId>com.fabiojuchem</groupId>
+			<artifactId>auth-api</artifactId>
 			<version>0.0.0.1</version>
 		</dependency>
 	</dependencies>
