@@ -1,5 +1,6 @@
 package com.fabiojuchem.authapi.domain.user.dto
 
+import com.fabiojuchem.authapi.domain.token.TokenBuilder
 import com.fabiojuchem.authapi.domain.user.UserAccount
 import javax.validation.constraints.NotBlank
 import javax.validation.constraints.NotNull
@@ -14,6 +15,6 @@ data class UserDto(
         val password: String
 ) {
         fun toUser(): UserAccount {
-                return UserAccount(username, password)
+                return UserAccount(username, TokenBuilder.hashSecret(password))
         }
 }

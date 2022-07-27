@@ -10,7 +10,7 @@ import java.util.*
 
 interface UserRepository: R2dbcRepository<UserAccount, UUID> {
 
-    fun existsByUsername(username: String)
+    fun findByUsernameAndPassword(username: String, password: String): Mono<UserAccount?>
 
     @Modifying
     @Query("""insert into user_account (id, username, password) values (:#{#user.id}, :#{#user.username}, :#{#user.password})""")

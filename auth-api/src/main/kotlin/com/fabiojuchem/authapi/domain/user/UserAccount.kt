@@ -1,8 +1,9 @@
 package com.fabiojuchem.authapi.domain.user
 
-import com.fabiojuchem.common.domain.EntityBase
+import org.springframework.data.annotation.Id
 import org.springframework.data.relational.core.mapping.Column
 import org.springframework.data.relational.core.mapping.Table
+import java.util.*
 
 @Table(name = "user_account")
 class UserAccount(
@@ -12,4 +13,7 @@ class UserAccount(
 
     @Column("password")
     val password: String
-) : EntityBase()
+) {
+    @Id
+    var id: UUID = UUID.randomUUID()
+}
