@@ -22,4 +22,8 @@ class AuthResource(
     fun createUser(@RequestBody @Valid dto: UserDto) = userService.createUser(dto)
     //TODO verificar porque o @Valid não esta funcionando
 
+    @ResponseStatus(HttpStatus.OK)
+    @PostMapping("/login")
+    fun login(@RequestBody dto: UserDto) = userService.login(dto)
+
 }

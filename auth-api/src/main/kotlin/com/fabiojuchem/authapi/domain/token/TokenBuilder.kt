@@ -4,13 +4,15 @@ import com.auth0.jwt.JWT
 import com.auth0.jwt.algorithms.Algorithm
 import java.nio.charset.StandardCharsets
 import java.security.MessageDigest
+import kotlin.math.floor
 
 class TokenBuilder {
 
     companion object {
-        fun build(value: String) {
-            val algorithm: Algorithm = Algorithm.HMAC256("secret")
-            val token = JWT.create()
+        fun build(): String {
+            val secret = floor(Math.random()*(9999999-0+1)+0)
+            val algorithm: Algorithm = Algorithm.HMAC256(secret.toString())
+            return JWT.create()
                     .withIssuer("auth0")
                     .sign(algorithm)
         }

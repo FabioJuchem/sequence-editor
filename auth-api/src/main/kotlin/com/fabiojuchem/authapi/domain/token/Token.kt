@@ -1,6 +1,7 @@
 package com.fabiojuchem.authapi.domain.token
 
 import com.fabiojuchem.common.domain.EntityBase
+import org.springframework.data.annotation.Id
 import org.springframework.data.relational.core.mapping.Column
 import org.springframework.data.relational.core.mapping.Table
 import java.time.LocalDateTime
@@ -8,16 +9,29 @@ import java.util.*
 
 @Table(name = "token")
 class Token(
+
         @Column("token")
-        private val token: String,
+        var token: String,
 
         @Column("user_account_id")
-        val userId: UUID
-): EntityBase() {
+        var userId: UUID
+) {
+
+        @Id
+        var id: UUID = UUID.randomUUID()
 
         @Column("created_at")
-        private val createdAt: LocalDateTime = LocalDateTime.now()
+        var createdAt: LocalDateTime = LocalDateTime.now()
 
-        @Column("created_at")
-        private val expiresIn: Long = 10000
+        @Column("expires_in")
+        var expiresIn: Long = 10000
+
+        fun isExpired(): Boolean {
+                return LocalDateTime.now().isBefore(createdAt.plusSeconds(expiresIn))
+        }
+
+        fun renew() {
+                this.createdAt = LocalDateTime.now()
+                this.token = TokenBuilder.build()
+        }
 }
