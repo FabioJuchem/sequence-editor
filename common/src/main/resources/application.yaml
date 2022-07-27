@@ -1,18 +1,18 @@
 spring:
-  datasource:
-    driverClassName: org.postgresql.Driver
-    url: jdbc:postgresql://ec2-44-207-121-57.compute-1.amazonaws.com:5432/d6gftdm29kbnft
+  main:
+    web-application-type: REACTIVE
+    allow-bean-definition-overriding: true
+  r2dbc:
+    url: r2dbc:postgresql://ec2-44-207-121-57.compute-1.amazonaws.com:5432/d6gftdm29kbnft
     username: rqnsdkoawpyspv
     password: ee8b676bfcab97b27ce62d4d53049f4750549ba4af61a1503fb2b07e20445f5a
-  jpa:
-    database-platform: org.hibernate.dialect.PostgreSQL9Dialect
-    show-sql: false
-    hibernate:
-      ddl-auto: none
-      properties:
-        hibernate.generate_statistics: false
+    properties:
+      sslMode: require
+
   liquibase:
+    url: jdbc:postgresql://ec2-44-207-121-57.compute-1.amazonaws.com:5432/d6gftdm29kbnft
+    user: rqnsdkoawpyspv
+    password: ee8b676bfcab97b27ce62d4d53049f4750549ba4af61a1503fb2b07e20445f5a
     change-log: classpath:liquibase/changelog.yaml
 
-server:
-  port: 8080
+
