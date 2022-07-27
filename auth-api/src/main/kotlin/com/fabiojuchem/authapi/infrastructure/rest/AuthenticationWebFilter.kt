@@ -2,47 +2,39 @@ package com.fabiojuchem.authapi.infrastructure.rest
 
 import com.fabiojuchem.authapi.domain.token.TokenBuilder
 import com.fabiojuchem.authapi.domain.token.repository.TokenRepository
-import org.springframework.core.annotation.Order
+import org.apache.tomcat.util.buf.HexUtils
+import org.springframework.http.HttpStatus
 import org.springframework.stereotype.Component
+import org.springframework.web.server.ServerWebExchange
+import org.springframework.web.server.WebFilter
+import org.springframework.web.server.WebFilterChain
 import reactor.core.publisher.Mono
 import reactor.util.context.Context
 import java.util.*
-import javax.servlet.Filter
-import javax.servlet.FilterChain
-import javax.servlet.ServletRequest
-import javax.servlet.ServletResponse
-import javax.servlet.http.HttpServletRequest
 
 const val USER_LOGGED_IN = "userLoggedIn"
 
 
 @Component
-@Order(-100)
 class AuthenticationWebFilter(
         private val tokenRepository: TokenRepository
-): Filter {
-
-    // TODO Adicionar verificação de token
-    override fun doFilter(request: ServletRequest?, response: ServletResponse?, chain: FilterChain?) {
-        Mono.justOrEmpty(request)
+) : WebFilter {
+    override fun filter(exchange: ServerWebExchange, chain: WebFilterChain): Mono<Void> {
+        return chain.filter(exchange)
                 .contextWrite {
-                    val request = request as HttpServletRequest
-                    if (request.headerNames.toList().contains("Authorization")) {
-                       checkUserLoggedIn(it, request.getHeader("Authorization"))
-                    } else {
-                        it
-                    }
+                    checkAuthorizationContext(it, exchange.request.headers["Authorization"]?.firstOrNull())
                 }
-
     }
 
+    fun checkAuthorizationContext(context: Context, headerValue: String?): Context {
+        return  headerValue?.let { checkUserLoggedIn(context, it) } ?: context
+    }
+
+
     private fun checkUserLoggedIn(context: Context, headerValue: String): Context {
-        val credentials =  headerValue.split(" ")[1]
-        val decodedBytes: ByteArray = Base64.getDecoder().decode(credentials)
-        val decodedString = String(decodedBytes)
-        val token = TokenBuilder.hashSecret(decodedString.split(":")[1])
-        val tokenFetched = tokenRepository.findByToken(token)
-        return tokenFetched?.let { context.put(USER_LOGGED_IN, it.user) } ?: context
+        val token =  headerValue.split(" ")[1]
+        val tokenFetched = tokenRepository.findByToken(token).block()
+        return tokenFetched?.let { context.put(USER_LOGGED_IN, it) } ?: context
 
     }
 }

@@ -1,24 +1,23 @@
 package com.fabiojuchem.authapi.domain.token
 
-import com.fabiojuchem.authapi.domain.user.User
 import com.fabiojuchem.common.domain.EntityBase
+import org.springframework.data.relational.core.mapping.Column
+import org.springframework.data.relational.core.mapping.Table
 import java.time.LocalDateTime
-import javax.persistence.Column
-import javax.persistence.JoinColumn
-import javax.persistence.Table
+import java.util.*
 
 @Table(name = "token")
 class Token(
-        @Column(name = "token")
+        @Column("token")
         private val token: String,
 
-        @JoinColumn(name = "user_id")
-        val user: User
+        @Column("user_account_id")
+        val userId: UUID
 ): EntityBase() {
 
-        @Column(name = "created_at")
+        @Column("created_at")
         private val createdAt: LocalDateTime = LocalDateTime.now()
 
-        @Column(name = "created_at")
+        @Column("created_at")
         private val expiresIn: Long = 10000
 }

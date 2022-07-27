@@ -1,10 +1,8 @@
 package com.fabiojuchem.common.domain
 
-import java.util.*
-import javax.persistence.Id
-import javax.persistence.MappedSuperclass
+import org.springframework.data.annotation.Id
+import java.util.UUID
 
-@MappedSuperclass
 abstract class EntityBase {
 
     @Id
