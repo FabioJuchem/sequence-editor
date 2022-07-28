@@ -17,7 +17,7 @@ class ConverterService {
     fun convert(input: Input, type: ConverterType): Mono<String> {
         return type.converter.convert(input)
                 .map { it.toJsonString() }
-                .doOnSuccess { logger.info("m=convert, message=Convert with Success") }
+                .doOnSuccess { logger.info("m=convert, message=Convert with Success, convertType=$type") }
                 .doOnError { logger.error("m=convert, error=${it.localizedMessage}, message=Fail to convert") }
     }
 }
