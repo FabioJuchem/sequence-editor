@@ -1,6 +1,5 @@
 package com.fabiojuchem.authapi.domain.token
 
-import com.fabiojuchem.common.domain.EntityBase
 import org.springframework.data.annotation.Id
 import org.springframework.data.relational.core.mapping.Column
 import org.springframework.data.relational.core.mapping.Table
