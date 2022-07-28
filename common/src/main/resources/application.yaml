@@ -15,4 +15,7 @@ spring:
     password: ee8b676bfcab97b27ce62d4d53049f4750549ba4af61a1503fb2b07e20445f5a
     change-log: classpath:liquibase/changelog.yaml
 
+server:
+  port: 8096
+
 
