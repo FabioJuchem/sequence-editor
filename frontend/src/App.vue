@@ -3,12 +3,6 @@
     <v-navigation-drawer id="nav" 
       app
       permanent>
-<!--       
-      <v-row>
-        <v-img class="helix-icon"
-          src="@/assets/helix_horizontal.png"
-        ></v-img>
-      </v-row> -->
 
       <v-list-item id="nav-header">
         <span class="title">Sequence Editor</span>
@@ -33,15 +27,11 @@
 
     <v-main>
       <home/>
-      <!-- <v-text-area class="mb-3">
-        Kiko Tozatti: Só se sabe para onde vai, quando se lembra de onde veio. Quem esquece de suas origens, está arriscando se perder no cominho.
-      </v-text-area> -->
     </v-main>
   </v-app>
 </template>
 
 <script>
-//import HelloWorld from './components/HelloWorld.vue';
 import Home from './components/Home.vue';
 
 export default {
@@ -52,14 +42,9 @@ export default {
   },
   data: () => ({
       items: [
-          { title: 'Informações de Usuário', icon: 'mdi-account' },
-          { title: 'Conversor DNA - RNA', icon: 'mdi-swap-horizontal' },
-          { title: 'Conversor DNA - Proteínas', icon: 'mdi-swap-horizontal' },
-          { title: 'Conversor de Unidades', icon: 'mdi-swap-horizontal' },
-          { title: 'Cálculos de Molaridade', icon: 'mdi-calculator-variant' },
-          { title: 'Cálculos de diluições', icon: 'mdi-calculator-variant' },
-          { title: 'Configurações', icon: 'mdi-cog-outline' },
-          { title: 'Sobre a Helix', icon: 'mdi-help-box' },
+          { title: 'Editor DNA/RNA', icon: 'mdi-swap-horizontal' },
+          { title: 'Protein Translator', icon: 'mdi-swap-horizontal' },
+          { title: 'Option 3', icon: 'mdi-swap-horizontal' },
         ]
     })
 }
@@ -79,11 +64,11 @@ export default {
   height: 900px;
   left: 0px;
   top: 0px;
-  background: #30436B;
+  background: #5A5AE2;
 }
 #nav-header {
   color: #FFFFFF;
-  background: #30436B;
+  background: #5A5AE2;
 }
 .options {
   margin-top: -50px;
