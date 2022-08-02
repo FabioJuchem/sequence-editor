@@ -20,7 +20,7 @@ class ConverterResource(
     fun convert(
             @RequestBody input: Input,
             @PathVariable type: ConverterType,
-            @RequestParam(defaultValue = "false") options: List<DecoratorType>
+            @RequestParam options: List<DecoratorType>
     ) =
         converterService.convert(input, type, options)
 
