@@ -1,98 +1,26 @@
 <template>
-  <v-container id="container d-flex">
-    <v-card class="header">
-      <v-row class="row"> 
-        <v-col class="avatar">
-          <v-avatar
-            size="80px">
-              <v-img
-                :src="require('../assets/pic-user.jpg')"
-               />
-            </v-avatar>
-          <span class="main-title">Olá, Fábio!</span>
-        </v-col>
-        <v-col class="premium-free">
-          <v-btn class="premium-button">Premium/Free</v-btn>
-        </v-col>
-      </v-row>
-    </v-card>
-    
+  <v-container id="container d-flex">    
     <div class="profile">
-      <v-card class="personal-data">
-        <v-row class="title-lines">
-          <v-text> 1.Dados do Usuário </v-text>
-        </v-row>
-        <v-row class="personal-row">
-          <v-col>
-            <v-text-field
-              id="nome"
-              class="field"
-              v-model="personalData.name"
-              label="Nome"
-              outlined
-              readonly
-            ></v-text-field>
-          </v-col>
-          <v-col>
-            <v-text-field
-              class="field"
-              v-model="personalData.surname"
-              label="Sobrenome"
-              outlined
-              readonly
-            ></v-text-field>
-          </v-col>
-          <v-col>
-            <v-text-field
-              class="field"
-              v-model="personalData.email"
-              label="E-mail"
-              outlined
-              readonly              
-            ></v-text-field>
-          </v-col>
-        </v-row>
-        <v-row class="personal-row">
-          <v-col>
-            <v-text-field
-              class="field"
-              v-model="personalData.company"
-              label="Empresa"
-              outlined
-              readonly              
-            ></v-text-field>
-          </v-col>
-          <v-col>
-            <v-text-field
-              class="field"
-              v-model="personalData.address"
-              label="Endereço"
-              outlined
-              readonly              
-            ></v-text-field>
-          </v-col>
-          <v-col></v-col>
-        </v-row>
-      </v-card>
-    </div>
+      <profile-header></profile-header>
 
     <div class="profile">
       <v-card class="professional-experience">
         <v-row class="title-lines">
-          <v-text
-          class=""> 2.Histórico de Análises </v-text>
+          <v-text> Conversor DNA/RNA </v-text>
         </v-row>
-        <v-row class="row">
-          <v-col class="company-list-item" 
-          cols="2"
-          v-for="company in companies"
-          :key="company.name">
-            
-                <business-card 
-                  :company="company.name"
-                  :role="company.role">
-                </business-card>
+      </v-card>
+    </div>
 
+      <v-card class="personal-data">
+        <v-row class="personal-row">
+          <v-col>
+            <v-textarea
+              id="input"
+              class="field"
+              v-model="inputValue"
+              label="Input"
+              outlined
+            ></v-textarea>
           </v-col>
         </v-row>
       </v-card>
@@ -100,6 +28,20 @@
 
     <div class="profile">
       <v-card class="">
+        <v-row class="title-lines">
+          <v-text> Saída </v-text>
+        </v-row>
+         <v-row class="personal-row">
+          <v-col>
+            <v-textarea
+              id="output"
+              class="field"
+              v-model="outputValue"
+              label="Output"
+              outlined
+            ></v-textarea>
+          </v-col>
+        </v-row>
         <v-row class="footer">
           <v-btn class="edit-button">Editar</v-btn>
         </v-row>
@@ -109,13 +51,13 @@
 </template>
 
 <script>
-  import Business from './shared/business/Business.vue';
+  import ProfileHeader from '../components/shared/ProfileHeader.vue';
 
   export default {
-    name: 'Home',
+    name: 'Converter',
 
     components: {
-      'business-card' : Business 
+      'profile-header' : ProfileHeader
     },
 
     data () {
@@ -146,13 +88,8 @@
             role: '05/01/2021'
           },
         },
-        personalData: {
-          name: 'Fábio',
-          surname: 'Vansovis Juchem',
-          company: 'Vansovis ltda.',
-          address: 'Maringá - PR, Brazil',
-          email: 'fabiojuchem@gmail.com'
-        },
+        inputValue: '',
+        outputValue: ''
       }
     },
   }
@@ -160,6 +97,9 @@
 </script>
 
 <style scoped>
+.profile-header {
+  width: 100%;
+}
 .header {
   margin-top: 46px;
 }

@@ -26,23 +26,22 @@
     </v-navigation-drawer>
 
     <v-main>
-      <home/>
+      <converter/>
     </v-main>
   </v-app>
 </template>
 
 <script>
-import Home from './components/Home.vue';
+import Converter from './components/Converter.vue';
 
 export default {
   name: 'App',
   components: {
-    // HelloWorld,
-    Home,
+    'converter': Converter,
   },
   data: () => ({
       items: [
-          { title: 'Editor DNA/RNA', icon: 'mdi-swap-horizontal' },
+          { title: 'Conversor DNA/RNA', icon: 'mdi-swap-horizontal' },
           { title: 'Protein Translator', icon: 'mdi-swap-horizontal' },
           { title: 'Option 3', icon: 'mdi-swap-horizontal' },
         ]
