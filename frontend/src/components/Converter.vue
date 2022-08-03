@@ -11,23 +11,67 @@
       </v-card>
     </div>
 
-      <v-card class="personal-data">
+      <v-card class="personal-data" style="background-color:#676258">
+        <v-row class="title-lines">
+          <v-text> Entrada </v-text>
+        </v-row>
         <v-row class="personal-row">
           <v-col>
             <v-textarea
               id="input"
               class="field"
               v-model="inputValue"
-              label="Input"
+              label="Entre a sequencia aqui (formato fasta)"
               outlined
+              background-color="white"
             ></v-textarea>
+          </v-col>
+        </v-row>
+        <v-row class="title-lines" no-gutters>
+          <v-col cols="2">
+            <v-select class="mr-2"
+              background-color="#FB8C00"
+              outlined
+              label="Métodos de conversão"
+              :items="convertionMethods"
+              attach
+              v-model="selectedMethods"
+              item-text="description"
+              value="value"
+            />
+          </v-col>
+           <v-col cols="2">
+            <v-select class="mr-2"
+              background-color="#FB8C00"
+              outlined
+              multiple
+              deletable-chips
+              label="Direção da converção"
+              :items="convertionDirection"
+              attach
+              item-text="description"
+              value="value"
+              v-model="selectedDirection"
+            />
+          </v-col>
+           <v-col cols="2">
+            <v-select
+              background-color="#FB8C00"
+              outlined
+              label="Outros"
+              :items="convertionsOthers"
+              attach
+              v-model="selectedOthers"
+              item-text="description"
+              value="value"
+            />
           </v-col>
         </v-row>
       </v-card>
     </div>
 
     <div class="profile">
-      <v-card class="">
+      <v-card class="" style="background-color:#676258">
         <v-row class="title-lines">
           <v-text> Saída </v-text>
         </v-row>
@@ -39,11 +83,16 @@
               v-model="outputValue"
               label="Output"
               outlined
+              background-color="white"
             ></v-textarea>
           </v-col>
         </v-row>
         <v-row class="footer">
-          <v-btn class="edit-button">Editar</v-btn>
+          <v-btn class="edit-button"
+            v-on:click="name('DNA_TO_RNA')"
+            >Converter
+          </v-btn>
+          <pre>{{ outputResponse }}</pre>
         </v-row>
       </v-card>
     </div> 
@@ -52,6 +101,7 @@
 
 <script>
   import ProfileHeader from '../components/shared/ProfileHeader.vue';
+  import axios from 'axios';
 
   export default {
     name: 'Converter',
@@ -60,36 +110,51 @@
       'profile-header' : ProfileHeader
     },
 
+    methods: {
+         name: function (type) {
+            axios.post(`/convert/${type}?options=`, {value: this.inputValue})
+            .then((resp) => this.outputResponse =  resp.data)
+          }
+      },
+    
     data () {
       return {
-        companies: {
-            company1: {
-            name: 'DNA - RNA',
-            role: '26/01/2022'
+        convertionMethods: [
+          {
+            description: 'DNA -> RNA',
+            value: 'DNA_TO_RNA'
           },
-          company2: {
-            name: 'DNA - RNA',
-            role: '10/12/2021'
+          {
+            description: 'RNA -> DNA',
+            value: 'RNA_TO_DNA'
+          }
+        ],
+        convertionDirection: [
+          {
+            description: 'Reverso',
+            value: 'REVERSE'
           },
-          company3: {
-            name: 'DNA - Proteínas',
-            role: '03/10/2021'
+          {
+            description: 'Complementar',
+            value: 'COMPLEMENTARY'
+          }
+        ],
+        convertionsOthers: [
+          {
+          description: 'Maiusculo',
+          value: 'UPPERCASE'
           },
-          company4: {
-            name: 'Cálculo de diluições',
-            role: '15/03/2021'
-          },
-          company5: {
-            name: 'DNA - RNA',
-            role: '11/03/2021'
-          },
-          company6: {
-            name: 'DNA - RNA',
-            role: '05/01/2021'
-          },
-        },
+          {
+            description: 'Minusculo',
+            value: 'LOWERCASE'
+          }
+        ],
         inputValue: '',
-        outputValue: ''
+        outputValue: '',
+        selectedMethods: [],
+        selectedDirection: [],
+        selectedOthers: [],
+        outputResponse: 'asdas'
       }
     },
   }
@@ -97,6 +162,10 @@
 </script>
 
 <style scoped>
+
+.options {
+  margin-right: 10px;
+}
 .profile-header {
   width: 100%;
 }

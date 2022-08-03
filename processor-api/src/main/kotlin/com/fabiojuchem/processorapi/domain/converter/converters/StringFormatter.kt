@@ -11,5 +11,5 @@ fun CharSequence.unaccent(): String {
 }
 
 fun String.cleanString(): String {
-    return this.trim().unaccent()
+    return this.trim().toUpperCase().unaccent()
 }

@@ -15,10 +15,10 @@
           :key="item.title"
           link>
           <v-list-item-icon class="itens">
-              <v-icon class="icon">{{ item.icon }}</v-icon>
+              <v-icon class="icon"> {{ item.icon }} </v-icon>
           </v-list-item-icon>
           <v-list-item-content class="itens">
-              <v-list-item-title>{{ item.title }}</v-list-item-title>
+              <v-list-item-title> {{ item.title }} </v-list-item-title>
           </v-list-item-content>
           </v-list-item>
       </v-list>
@@ -41,8 +41,8 @@ export default {
   },
   data: () => ({
       items: [
-          { title: 'Conversor DNA/RNA', icon: 'mdi-swap-horizontal' },
-          { title: 'Protein Translator', icon: 'mdi-swap-horizontal' },
+          { title: 'Conversor DNA/RNA', icon: 'mdi-swap-horizontal', type: 'DNA_RNA' },
+          { title: 'Protein Translator', icon: 'mdi-swap-horizontal', type: 'PROTEIN' },
           { title: 'Option 3', icon: 'mdi-swap-horizontal' },
         ]
     })
