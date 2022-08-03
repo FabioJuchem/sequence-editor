@@ -27,7 +27,7 @@ class UserService(
 
     fun login(user: UserDto): Mono<String> {
           return findUserAccount(user)
-                 .flatMap { findUser(it!!) }
+                 .flatMap { findToken(it!!) }
                  .flatMap {
                      val finalToken = it.token
                      finalToken.renew()
@@ -44,7 +44,7 @@ class UserService(
 
     private fun persistTokenData(token: TokenDetails) = if (token.isNew) tokenRepository.save(token.token) else tokenRepository.update(token.token)
 
-    private fun findUser(it: UserAccount) =
+    private fun findToken(it: UserAccount) =
             tokenRepository.findByUserId(it.id)
                     .map { token -> TokenDetails(token!!, it, false) }
                     .switchIfEmpty(Mono.just(TokenDetails(Token(TokenBuilder.build(), it.id), it, true)))

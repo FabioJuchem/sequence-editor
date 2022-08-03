@@ -6,12 +6,12 @@ import com.fabiojuchem.processorapi.domain.converter.Output
 import reactor.core.publisher.Mono
 import reactor.kotlin.core.publisher.toMono
 
-class DnaToRnaConverter : Converter{
+class RnaToDnaConverter : Converter{
 
     override fun convert(input: Input): Mono<Output> {
         return input.toMono()
             .map { input.value.cleanString() }
-            .map { it.replace("T", "U") }
+            .map { it.replace("U", "T") }
             .map { Output(it) }
     }
 
