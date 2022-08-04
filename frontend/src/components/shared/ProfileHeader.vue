@@ -1,6 +1,12 @@
 <template>
   <v-card class="header">
-    <v-row class="row"> 
+    <v-row class="row" v-if="!isLogged"> 
+      <v-btn class="login-button"
+        v-on:click="login"
+        outlined>Login
+      </v-btn>
+    </v-row>
+    <v-row class="row" v-else> 
       <span class="main-title">Olá, Fábio!</span>
       <v-avatar
         size="25px">
@@ -19,8 +25,15 @@
     components: {
     },
 
+    methods: {
+      login: function() {
+        this.$emit('login')
+      }
+    },
+
     data () {
       return {
+        isLogged: false
       }
     }
   }

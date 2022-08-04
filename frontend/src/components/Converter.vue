@@ -1,7 +1,7 @@
 <template>
   <v-container id="container d-flex">    
     <div class="profile">
-      <profile-header></profile-header>
+      <profile-header @login="login"></profile-header>
 
     <div class="profile">
       <v-card class="professional-experience">
@@ -35,7 +35,7 @@
               label="Métodos de conversão"
               :items="convertionMethods"
               attach
-              v-model="selectedMethods"
+              v-model="selectedMethod"
               item-text="description"
               value="value"
             />
@@ -80,7 +80,7 @@
             <v-textarea
               id="output"
               class="field"
-              v-model="outputValue"
+              v-model="outputResponse.value"
               label="Output"
               outlined
               background-color="white"
@@ -89,10 +89,9 @@
         </v-row>
         <v-row class="footer">
           <v-btn class="edit-button"
-            v-on:click="name('DNA_TO_RNA')"
+            v-on:click="convert(selectedMethod)"
             >Converter
           </v-btn>
-          <pre>{{ outputResponse }}</pre>
         </v-row>
       </v-card>
     </div> 
@@ -111,11 +110,20 @@
     },
 
     methods: {
-         name: function (type) {
-            axios.post(`/convert/${type}?options=`, {value: this.inputValue})
-            .then((resp) => this.outputResponse =  resp.data)
-          }
-      },
+        convert: function (type) {
+          axios.post(`/convert/${type}?options=${this.prepareOptions()}`, {value: this.inputValue})
+          .then((resp) => this.outputResponse =  resp.data)
+        },
+
+        prepareOptions: function () {
+          return this.selectedDirection.concat(this.selectedOthers).join(',')
+        },
+
+        login: function () {
+          this.$emit('login')
+        }
+      
+    },
     
     data () {
       return {
@@ -151,10 +159,10 @@
         ],
         inputValue: '',
         outputValue: '',
-        selectedMethods: [],
+        selectedMethod: [],
         selectedDirection: [],
         selectedOthers: [],
-        outputResponse: 'asdas'
+        outputResponse: ''
       }
     },
   }
