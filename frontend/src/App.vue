@@ -13,7 +13,8 @@
           <v-list-item id="list"
           v-for="item in items"
           :key="item.title"
-          link>
+          link
+          v-on:click="selectRoute(item.type), login=false">
           <v-list-item-icon class="itens">
               <v-icon class="icon"> {{ item.icon }} </v-icon>
           </v-list-item-icon>
@@ -26,20 +27,35 @@
     </v-navigation-drawer>
 
     <v-main>
-      <converter/>
+      <login v-if="login"/>
+      <converter v-if="converter"
+        @login="login=true, converter=false"
+      />
     </v-main>
   </v-app>
 </template>
 
 <script>
 import Converter from './components/Converter.vue';
+import Login from './components/Login.vue';
 
 export default {
   name: 'App',
   components: {
     'converter': Converter,
+    'login': Login,
   },
+  methods: {
+         selectRoute: function(type) {
+            if(type == 'DNA_RNA') {
+              this.converter = true
+            }
+         }
+      },
+
   data: () => ({
+      login: false,
+      converter: true,
       items: [
           { title: 'Conversor DNA/RNA', icon: 'mdi-swap-horizontal', type: 'DNA_RNA' },
           { title: 'Protein Translator', icon: 'mdi-swap-horizontal', type: 'PROTEIN' },
