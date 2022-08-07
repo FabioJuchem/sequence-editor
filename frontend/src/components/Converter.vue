@@ -1,19 +1,19 @@
 <template>
   <v-container id="container d-flex">    
     <div class="profile">
-      <profile-header @login="login"></profile-header>
+      <profile-header @login="login" :userData="userData"></profile-header>
 
     <div class="profile">
       <v-card class="professional-experience">
         <v-row class="title-lines">
-          <v-text> Conversor DNA/RNA </v-text>
+          <span> Conversor DNA/RNA </span>
         </v-row>
       </v-card>
     </div>
 
       <v-card class="personal-data" style="background-color:#676258">
         <v-row class="title-lines">
-          <v-text> Entrada </v-text>
+          <span> Entrada </span>
         </v-row>
         <v-row class="personal-row">
           <v-col>
@@ -73,7 +73,7 @@
     <div class="profile">
       <v-card class="" style="background-color:#676258">
         <v-row class="title-lines">
-          <v-text> Saída </v-text>
+          <span> Saída </span>
         </v-row>
          <v-row class="personal-row">
           <v-col>
@@ -104,6 +104,9 @@
 
   export default {
     name: 'Converter',
+    props: {
+      userData: Object
+    },
 
     components: {
       'profile-header' : ProfileHeader

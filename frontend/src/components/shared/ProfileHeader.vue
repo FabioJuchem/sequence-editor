@@ -1,13 +1,13 @@
 <template>
   <v-card class="header">
-    <v-row class="row" v-if="!isLogged"> 
+    <v-row class="row" v-if="!userData.name"> 
       <v-btn class="login-button"
         v-on:click="login"
         outlined>Login
       </v-btn>
     </v-row>
     <v-row class="row" v-else> 
-      <span class="main-title">Olá, Fábio!</span>
+      <span class="main-title">Olá, {{ userData.name }}!</span>
       <v-avatar
         size="25px">
           <v-img
@@ -21,6 +21,9 @@
 <script>
   export default {
     name: 'ProfileHeader',
+    props: {
+      userData: Object
+    },
 
     components: {
     },
@@ -33,9 +36,9 @@
 
     data () {
       return {
-        isLogged: false
+        isLogged: false,
       }
-    }
+    },
   }
 
 </script>

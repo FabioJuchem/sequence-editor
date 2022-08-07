@@ -12,7 +12,13 @@ class UserAccount(
     val username: String,
 
     @Column("password")
-    val password: String
+    val password: String,
+
+    @Column("name")
+    val name: String,
+
+    @Column("email")
+    val email: String
 ) {
     @Id
     var id: UUID = UUID.randomUUID()
