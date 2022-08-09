@@ -17,6 +17,7 @@ class ComplementaryDecorator : ConverterDecorator {
                 'T' -> 'A'
                 'C' -> 'G'
                 'G' -> 'C'
+                'U' -> 'A'
                 else -> ' '
             }
         }.joinToString("").replace(" ", "")
