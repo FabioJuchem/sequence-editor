@@ -13,10 +13,11 @@ class ComplementaryDecorator : ConverterDecorator {
         val value = output.value
         output.value = value.toCharArray().map {
             when(it) {
-                'C' -> 'T'
+                'A' -> 'T'
                 'T' -> 'A'
                 'C' -> 'G'
                 'G' -> 'C'
+                'U' -> 'A'
                 else -> ' '
             }
         }.joinToString("").replace(" ", "")

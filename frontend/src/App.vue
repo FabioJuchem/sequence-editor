@@ -27,9 +27,10 @@
     </v-navigation-drawer>
 
     <v-main>
-      <login v-if="login"/>
+      <login v-if="login" @userData="userLoggedIn($event)"/>
       <converter v-if="converter"
         @login="login=true, converter=false"
+        :userData="userData"
       />
     </v-main>
   </v-app>
@@ -38,6 +39,7 @@
 <script>
 import Converter from './components/Converter.vue';
 import Login from './components/Login.vue';
+import axios from 'axios';
 
 export default {
   name: 'App',
@@ -46,16 +48,38 @@ export default {
     'login': Login,
   },
   methods: {
-         selectRoute: function(type) {
-            if(type == 'DNA_RNA') {
-              this.converter = true
-            }
-         }
+        selectRoute: function(type) {
+          if(type == 'DNA_RNA') {
+            this.converter = true
+          }
+        },
+        userLoggedIn: function(userData) {
+          this.userData = userData
+          this.login = false
+          this.converter = true
+        },
+        getUserLoggedIn: function() {
+          let token = localStorage.getItem('token')
+          console.log(token)
+          if(token) {
+            axios.get('/auth/user', { headers: { 'Authorization': `Bearer ${token}` } })
+              .then(resp => {
+                this.userData = { name: resp.data.name, email: resp.data.email, token: this.token }
+              })
+          }
+        }
+
       },
+
+  created: function() {
+      this.getUserLoggedIn()
+  },
 
   data: () => ({
       login: false,
       converter: true,
+      userData: {},
+      token: '',
       items: [
           { title: 'Conversor DNA/RNA', icon: 'mdi-swap-horizontal', type: 'DNA_RNA' },
           { title: 'Protein Translator', icon: 'mdi-swap-horizontal', type: 'PROTEIN' },

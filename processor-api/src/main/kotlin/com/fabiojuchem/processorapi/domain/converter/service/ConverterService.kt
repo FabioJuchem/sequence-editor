@@ -30,5 +30,4 @@ class ConverterService(
     }
 
     fun getDecoratorByType(type: DecoratorType) = decorators.filter { it.type == type }.first()
-
 }

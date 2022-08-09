@@ -12,9 +12,7 @@ const val USER_LOGGED_IN = "userLoggedIn"
 
 
 @Component
-class AuthenticationWebFilter(
-        private val tokenRepository: TokenRepository
-) : WebFilter {
+class AuthenticationWebFilter: WebFilter {
     override fun filter(exchange: ServerWebExchange, chain: WebFilterChain): Mono<Void> {
         return chain.filter(exchange)
                 .contextWrite {
@@ -29,8 +27,7 @@ class AuthenticationWebFilter(
 
     private fun checkUserLoggedIn(context: Context, headerValue: String): Context {
         val token =  headerValue.split(" ")[1]
-        val tokenFetched = tokenRepository.findByToken(token).block()
-        return tokenFetched?.let { context.put(USER_LOGGED_IN, it) } ?: context
+        return context.put(USER_LOGGED_IN, token)
 
     }
 }

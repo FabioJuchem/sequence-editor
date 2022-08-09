@@ -1,13 +1,12 @@
 package com.fabiojuchem.authapi.resource.rest
 
+import com.fabiojuchem.authapi.domain.user.dto.LoginDto
+import com.fabiojuchem.authapi.domain.user.dto.TokenDto
+import com.fabiojuchem.authapi.domain.user.dto.UserDetailsDto
 import com.fabiojuchem.authapi.domain.user.dto.UserDto
 import com.fabiojuchem.authapi.domain.user.service.UserService
-import jdk.jfr.ContentType
 import org.springframework.http.HttpStatus
-import org.springframework.http.ResponseEntity
-import org.springframework.validation.annotation.Validated
 import org.springframework.web.bind.annotation.*
-import org.springframework.web.bind.support.WebExchangeBindException
 import reactor.core.publisher.Mono
 import javax.validation.Valid
 
@@ -24,6 +23,11 @@ class AuthResource(
 
     @ResponseStatus(HttpStatus.OK)
     @PostMapping("/login")
-    fun login(@RequestBody dto: UserDto) = userService.login(dto)
+    fun login(@RequestBody dto: LoginDto) = userService.login(dto)
+
+    @GetMapping("/user")
+    fun getUserData(): Mono<UserDetailsDto> {
+        return userService.findUserByToken()
+    }
 
 }

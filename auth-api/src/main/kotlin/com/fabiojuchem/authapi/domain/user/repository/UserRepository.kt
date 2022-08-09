@@ -13,6 +13,6 @@ interface UserRepository: R2dbcRepository<UserAccount, UUID> {
     fun findByUsernameAndPassword(username: String, password: String): Mono<UserAccount?>
 
     @Modifying
-    @Query("""insert into user_account (id, username, password) values (:#{#user.id}, :#{#user.username}, :#{#user.password})""")
+    @Query("""insert into user_account (id, username, password, name, email) values (:#{#user.id}, :#{#user.username}, :#{#user.password}, :#{#user.name}, :#{#user.email})""")
     fun save(user: UserAccount): Mono<Void>
 }

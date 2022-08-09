@@ -12,9 +12,17 @@ data class UserDto(
 
         @field:NotNull(message = "password is required")
         @field:NotBlank(message = "password is required")
-        val password: String
+        val password: String,
+
+        @field:NotNull(message = "name is required")
+        @field:NotBlank(message = "name is required")
+        val name: String,
+
+        @field:NotNull(message = "email is required")
+        @field:NotBlank(message = "email is required")
+        val email: String
 ) {
         fun toUser(): UserAccount {
-                return UserAccount(username, TokenBuilder.hashSecret(password))
+                return UserAccount(username, TokenBuilder.hashSecret(password), name, email)
         }
 }

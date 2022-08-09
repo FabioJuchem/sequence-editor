@@ -9,14 +9,14 @@
             <v-text-field
               id="user"
               class="field"
-              v-model="inputValue"
+              v-model="username"
               label="Usuario"
               background-color="white"
             ></v-text-field>
             <v-text-field
               id="password"
               class="field"
-              v-model="inputValue"
+              v-model="password"
               label="Senha"
               background-color="white"
             ></v-text-field>
@@ -25,25 +25,57 @@
         <v-row class="button-box">
           <v-spacer></v-spacer>
           <v-btn class="login-button"
-            v-on:click="convert(selectedMethod)"
+            v-on:click="login"
+            :loading="loading"
             >Acessar
           </v-btn>
         </v-row>
       </v-card>
     </div>
+      <v-snackbar
+        :value="userData.name"
+        top
+        color="green"
+        timeout="2000"
+      > Usuario logado com sucesso
+    </v-snackbar>
   </v-container>
 </template>
 
 <script>
-  // import axios from 'axios';
-
+  import axios from 'axios';
   export default {
+    components: {
+    },
+
     methods: {
+      login: function() {
+        this.loading = true
+        axios.post('/auth/login', { username: this.username, password: this.password })
+          .then((resp) => {
+            this.token = resp.data
+            axios.get('/auth/user', { headers: { 'Authorization': `Bearer ${this.token}` } })
+              .then(resp => {
+                this.userData = { name: resp.data.name, email: resp.data.email, token: this.token }
+                this.$emit('userData', this.userData)
+              }).finally(() => {
+                this.loading = false
+                localStorage.setItem('token', this.token)
+              })
+          })
+          
+        
+      }
          
-      },
+    },
     
     data () {
       return {
+        username: '',
+        password: '',
+        userData: '',
+        token: '',
+        loading: false
       }
     },
   }
