@@ -6,7 +6,7 @@
 		<groupId>com.fabiojuchem</groupId>
 		<artifactId>sequence-editor</artifactId>
 		<version>0.0.0.1</version>
-		<relativePath>../../sequence-editor</relativePath>
+		<relativePath>../pom.xml</relativePath>
 	</parent>
 	<groupId>com.fabiojuchem</groupId>
 	<artifactId>processor-api</artifactId>
