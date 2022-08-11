@@ -142,7 +142,7 @@
 				<filtering>true</filtering>
 				<includes>
 					<include>**/*.properties</include>
-					<include>**/*.yml</include>
+					<include>**/*.yaml</include>
 				</includes>
 				<excludes>
 					<exclude>**/*.java</exclude>
