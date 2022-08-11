@@ -6,7 +6,7 @@ import org.springframework.context.annotation.ComponentScan
 import org.springframework.web.reactive.config.EnableWebFlux
 
 @SpringBootApplication
-@ComponentScan(basePackages = ["com.fabiojuchem"])
+@ComponentScan
 @EnableWebFlux
 class AppmainApplication
 
