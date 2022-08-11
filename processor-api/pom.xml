@@ -14,12 +14,5 @@
 	<name>processor-api</name>
 	<description>Demo project for Spring Boot</description>
 
-	<dependencies>
-		<dependency>
-			<groupId>com.fabiojuchem</groupId>
-			<artifactId>common</artifactId>
-			<version>0.0.0.1</version>
-		</dependency>
-	</dependencies>
 
 </project>
