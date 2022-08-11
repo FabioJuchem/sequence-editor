@@ -14,8 +14,6 @@
 	<name>appmain</name>
 	<description>Demo project for Spring Boot</description>
 
-	<packaging>pom</packaging>
-
 	<dependencies>
 		<dependency>
 			<groupId>com.fabiojuchem</groupId>
