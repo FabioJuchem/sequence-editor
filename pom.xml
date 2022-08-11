@@ -17,7 +17,6 @@
 	<properties>
 		<java.version>1.8</java.version>
 		<kotlin.version>1.4.0</kotlin.version>
-		<start-class>com.fabiojuchem.appmain.AppmainApplication</start-class>
 
 	</properties>
 
@@ -136,10 +135,6 @@
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
-				<configuration>
-					<fork>true</fork>
-					<mainClass>com.fabiojuchem.appmain.AppmainApplication</mainClass>
-				</configuration>
 			</plugin>
 			<plugin>
 				<groupId>org.jetbrains.kotlin</groupId>

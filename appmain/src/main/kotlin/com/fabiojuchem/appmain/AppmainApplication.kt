@@ -8,14 +8,8 @@ import org.springframework.web.reactive.config.EnableWebFlux
 @SpringBootApplication
 @ComponentScan(basePackages = ["com.fabiojuchem"])
 @EnableWebFlux
-class AppmainApplication {
+class AppmainApplication
 
-	companion object {
-		fun main(args: Array<String>) {
-			runApplication<AppmainApplication>(*args)
-		}
-	}
-
+fun main(args: Array<String>) {
+	runApplication<AppmainApplication>(*args)
 }
-
-
