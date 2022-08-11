@@ -10,9 +10,12 @@ import org.springframework.web.reactive.config.EnableWebFlux
 @EnableWebFlux
 class AppmainApplication {
 
-	fun main(args: Array<String>) {
-		runApplication<AppmainApplication>(*args)
+	companion object {
+		fun main(args: Array<String>) {
+			runApplication<AppmainApplication>(*args)
+		}
 	}
+
 }
 
 
