@@ -6,7 +6,7 @@
     <div class="profile">
       <v-card class="professional-experience">
         <v-row class="title-lines">
-          <span> Conversor DNA/RNA </span>
+          <span> Tradutor de proteina </span>
         </v-row>
       </v-card>
     </div>

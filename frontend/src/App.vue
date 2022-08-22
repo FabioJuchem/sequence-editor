@@ -32,12 +32,17 @@
         @login="login=true, converter=false"
         :userData="userData"
       />
+      <aminoacid v-if="aminoacid"
+        @login="login=true, aminoacid=false"
+        :userData="userData"
+      />
     </v-main>
   </v-app>
 </template>
 
 <script>
 import Converter from './components/Converter.vue';
+import AminoacidConverter from './components/AminoacidConverter.vue';
 import Login from './components/Login.vue';
 import axios from 'axios';
 
@@ -46,11 +51,17 @@ export default {
   components: {
     'converter': Converter,
     'login': Login,
+    'aminoacid': AminoacidConverter
   },
   methods: {
         selectRoute: function(type) {
           if(type == 'DNA_RNA') {
             this.converter = true
+            this.aminoacid = false
+          }
+          if(type == 'AMINOACID') {
+            this.aminoacid = true
+            this.converter = false
           }
         },
         userLoggedIn: function(userData) {
@@ -78,12 +89,12 @@ export default {
   data: () => ({
       login: false,
       converter: true,
+      aminoacid: false,
       userData: {},
       token: '',
       items: [
           { title: 'Conversor DNA/RNA', icon: 'mdi-swap-horizontal', type: 'DNA_RNA' },
-          { title: 'Protein Translator', icon: 'mdi-swap-horizontal', type: 'PROTEIN' },
-          { title: 'Option 3', icon: 'mdi-swap-horizontal' },
+          { title: 'Aminoacid Translator', icon: 'mdi-swap-horizontal', type: 'AMINOACID' },
         ]
     })
 }
