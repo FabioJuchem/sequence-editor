@@ -1,1 +1,1 @@
-web: java -Dserver.port=$PORT $JAVA_OPTS -jar appmain/target/appmain-0.0.0.1.jar
+web: java $JAVA_OPTS -jar target/sequence-editor-0.0.0.1.jar
