@@ -15,33 +15,23 @@
 	<description>Demo project for Spring Boot</description>
 
 	<properties>
-		<java.version>14</java.version>
+		<java.version>11</java.version>
 		<kotlin.version>1.4.0</kotlin.version>
 		<maven-jar-plugin.version>3.1.1</maven-jar-plugin.version>
 	</properties>
 
-	<packaging>jar</packaging>
+	<modules>
+		<module>appmain</module>
+		<module>common</module>
+		<module>processor-api</module>
+		<module>auth-api</module>
+	</modules>
+
+	<packaging>pom</packaging>
 
 
 	<dependencies>
 
-		<dependency>
-			<groupId>com.fabiojuchem</groupId>
-			<artifactId>common</artifactId>
-			<version>0.0.0.1</version>
-		</dependency>
-
-		<dependency>
-			<groupId>com.fabiojuchem</groupId>
-			<artifactId>processor-api</artifactId>
-			<version>0.0.0.1</version>
-		</dependency>
-
-		<dependency>
-			<groupId>com.fabiojuchem</groupId>
-			<artifactId>auth-api</artifactId>
-			<version>0.0.0.1</version>
-		</dependency>
 				<dependency>
 					<groupId>org.springframework.boot</groupId>
 					<artifactId>spring-boot-starter-data-jdbc</artifactId>
@@ -166,7 +156,6 @@
 
 	<build>
 		<sourceDirectory>${project.basedir}/src/main/kotlin</sourceDirectory>
-		<testSourceDirectory>${project.basedir}/src/test/kotlin</testSourceDirectory>
 		<plugins>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
@@ -175,7 +164,7 @@
 					<archive>
 						<manifest>
 							<addClasspath>true</addClasspath>
-							<mainClass>com.fabiojuchem.sequenceeditor.ApplicationKt</mainClass>
+							<mainClass>com.fabiojuchem.appmain.ApplicationKt</mainClass>
 						</manifest>
 					</archive>
 				</configuration>
