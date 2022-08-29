@@ -32,10 +32,10 @@
             <v-select class="mr-2"
               background-color="#FB8C00"
               outlined
-              label="Métodos de conversão"
-              :items="convertionMethods"
+              label="Frames"
+              :items="convertionFrames"
               attach
-              v-model="selectedMethod"
+              v-model="selectedFrames"
               item-text="description"
               value="value"
             />
@@ -46,24 +46,12 @@
               outlined
               multiple
               deletable-chips
-              label="Direção da converção"
-              :items="convertionDirection"
-              attach
-              item-text="description"
-              value="value"
-              v-model="selectedDirection"
-            />
-          </v-col>
-           <v-col cols="2">
-            <v-select
-              background-color="#FB8C00"
-              outlined
               label="Outros"
-              :items="convertionsOthers"
+              :items="others"
               attach
-              v-model="selectedOthers"
               item-text="description"
               value="value"
+              v-model="selectedOther"
             />
           </v-col>
         </v-row>
@@ -131,40 +119,33 @@
     
     data () {
       return {
-        convertionMethods: [
+        convertionFrames: [
           {
-            description: 'DNA -> RNA',
-            value: 'DNA_TO_RNA'
+            description: 'Frame 1',
+            value: 'FRAME_ONE'
           },
           {
-            description: 'RNA -> DNA',
-            value: 'RNA_TO_DNA'
+            description: 'Frame 2',
+            value: 'FRAME_TWO'
+          },
+          {
+            description: 'Frame 3',
+            value: 'FRAME_THREE'
           }
         ],
-        convertionDirection: [
+        others: [
           {
-            description: 'Reverso',
+            description: 'Mostrar AA apenas',
             value: 'REVERSE'
           },
           {
-            description: 'Complementar',
+            description: 'Mostrar AA + DNA',
             value: 'COMPLEMENTARY'
-          }
-        ],
-        convertionsOthers: [
-          {
-          description: 'Maiusculo',
-          value: 'UPPERCASE'
-          },
-          {
-            description: 'Minusculo',
-            value: 'LOWERCASE'
           }
         ],
         inputValue: '',
         outputValue: '',
-        selectedMethod: [],
-        selectedDirection: [],
+        selectedFrames: [],
         selectedOthers: [],
         outputResponse: ''
       }
