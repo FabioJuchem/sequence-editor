@@ -1,4 +1,4 @@
-package com.fabiojuchem.sequenceeditor
+package com.fabiojuchem.appmain
 
 import org.springframework.boot.autoconfigure.domain.EntityScan
 import org.springframework.context.annotation.ComponentScan
