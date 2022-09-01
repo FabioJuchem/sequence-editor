@@ -27,12 +27,10 @@ class ConverterResource(
     ) =
         converterService.convert(input, type, options)
 
-    @PostMapping("/convert/aminoacid/{type}", produces = [MediaType.APPLICATION_JSON_VALUE] )
+    @PostMapping("/convert/aminoacid", produces = [MediaType.APPLICATION_JSON_VALUE] )
     fun convertAminoacid(
         @RequestBody input: Input,
-        @RequestParam options: List<AminoacidOption>
-    ) =
-        aminoacidConverterService.convertAminoacid(input, options)
+    ) = aminoacidConverterService.convertAminoacid(input)
 
 
 }

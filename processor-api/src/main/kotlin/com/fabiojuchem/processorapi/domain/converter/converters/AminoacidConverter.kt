@@ -9,19 +9,53 @@ import reactor.core.publisher.Mono
 
 @Service
 class AminoacidConverter(
-    val aminoacidRepository: AminoacidRepository
+    private val aminoacidRepository: AminoacidRepository
 ) {
 
-    fun convert(input: Input): Mono<List<String>> {
+    fun convert(input: Input): Mono<Triple<MutableList<String>, MutableList<String>, MutableList<String>>> {
         return Mono.just(input)
             .map {
-                processInput(input)
+                Triple(
+                    processInput(input.value, mutableListOf()),
+                    processInput(input.value.drop(1), mutableListOf()),
+                    processInput(input.value.drop(2), mutableListOf())
+                )
+            }.flatMap { triple ->
+                getAminoacids().collectList()
+                    .map {
+                        var sequenceOne = mutableListOf<String>()
+                        var sequenceTwo = mutableListOf<String>()
+                        var sequenceThree = mutableListOf<String>()
+                        getAminoacidSequence(triple.first, sequenceOne, it)
+                        getAminoacidSequence(triple.second, sequenceTwo, it)
+                        getAminoacidSequence(triple.third, sequenceThree, it)
+                        Triple(sequenceOne,sequenceTwo,sequenceThree)
+                    }
             }
+
 
     }
 
-    fun processInput(input: Input): List<String> {
-        return input.value.toLowerCase().split(Regex("[a-z]{3}"))
+    private fun getAminoacidSequence(
+        it: List<String>,
+        sequenceOne: MutableList<String>,
+        aminoacids: List<Aminoacid>
+    ) {
+        it.forEach { value ->
+            sequenceOne.add(aminoacids.filter { aminoacid: Aminoacid -> value == aminoacid.rnaCodon }.first()?.symbol)
+        }
+    }
+
+    fun processInput(input: String, list: List<String>): List<String> {
+        val list = mutableListOf<String>()
+        // converter para rna
+        var inputValue = input
+        if (inputValue.length > 2 ) {
+            list.add(inputValue.substring(0, 3))
+            inputValue = inputValue.drop(3)
+            list.addAll(processInput(inputValue, list))
+        }
+        return list
     }
 
     fun getAminoacids(): Flux<Aminoacid> {

@@ -5,26 +5,26 @@ import org.springframework.data.relational.core.mapping.Column
 import org.springframework.data.relational.core.mapping.Table
 import java.util.*
 
-@Table(name = "protein")
+@Table(name = "aminoacid")
 class Aminoacid(
 
     @Column("name")
-    private val name: String,
+    val name: String,
 
     @Column("initials")
-    private val initials: String,
+    val initials: String,
 
     @Column("symbol")
-    private val symbol: String,
+    val symbol: String,
 
     @Column("rna_codon")
-    private val rnaCodon: String,
+    val rnaCodon: String,
 
     @Column("rna_anti_codon")
-    private val rnaAntiCodon: String,
+    val rnaAntiCodon: String,
 
-    @Column("desription")
-    private val description: String
+    @Column("description")
+    val description: String
 
 
 ) {
