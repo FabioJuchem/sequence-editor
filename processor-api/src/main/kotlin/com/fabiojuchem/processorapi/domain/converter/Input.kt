@@ -1,3 +1,3 @@
 package com.fabiojuchem.processorapi.domain.converter
 
-class Input(val value: String)
+class Input(var value: String)
