@@ -28,18 +28,6 @@
           </v-col>
         </v-row>
         <v-row class="title-lines" no-gutters>
-          <v-col cols="2">
-            <v-select class="mr-2"
-              background-color="#FB8C00"
-              outlined
-              label="Frames"
-              :items="convertionFrames"
-              attach
-              v-model="selectedFrames"
-              item-text="description"
-              value="value"
-            />
-          </v-col>
            <v-col cols="2">
             <v-select class="mr-2"
               background-color="#FB8C00"
@@ -54,6 +42,20 @@
               v-model="selectedOther"
             />
           </v-col>
+          <v-col cols="2">
+            <v-select class="mr-2"
+              background-color="#FB8C00"
+              outlined
+              multiple
+              deletable-chips
+              label="Direção"
+              :items="direction"
+              attach
+              item-text="description"
+              value="value"
+              v-model="selectedDirection"
+            />
+          </v-col>
         </v-row>
       </v-card>
     </div>
@@ -61,19 +63,52 @@
     <div class="profile">
       <v-card class="" style="background-color:#676258">
         <v-row class="title-lines">
-          <span> Saída </span>
+          <span> Frame 1 </span>
         </v-row>
          <v-row class="personal-row">
           <v-col>
-            <v-textarea
+            <v-text-field
               id="output"
               class="field"
-              v-model="outputResponse.value"
+              v-model="outputResponse.first"
+              label="Output"
+              height="auto"
+              outlined
+              background-color="white"
+              readonly
+            ></v-text-field>
+          </v-col>
+        </v-row>
+        <v-row class="title-lines">
+          <span> Frame 2 </span>
+        </v-row>
+         <v-row class="personal-row">
+          <v-col>
+            <v-text-field
+              id="output"
+              class="field"
+              v-model="outputResponse.second"
               label="Output"
               outlined
               background-color="white"
               readonly
-            ></v-textarea>
+            ></v-text-field>
+          </v-col>
+        </v-row>
+        <v-row class="title-lines">
+          <span> Frame 3 </span>
+        </v-row>
+         <v-row class="personal-row">
+          <v-col>
+            <v-text-field
+              id="output"
+              class="field"
+              v-model="outputResponse.third"
+              label="Output"
+              outlined
+              background-color="white"
+              readonly
+            ></v-text-field>
           </v-col>
         </v-row>
         <v-row class="footer">
@@ -102,8 +137,8 @@
     },
 
     methods: {
-        convert: function (type) {
-          axios.post(`/convert/${type}?options=${this.prepareOptions()}`, {value: this.inputValue})
+        convert: function () {
+          axios.post(`/convert/aminoacid`, {value: this.inputValue})
           .then((resp) => this.outputResponse =  resp.data)
         },
 
@@ -119,20 +154,6 @@
     
     data () {
       return {
-        convertionFrames: [
-          {
-            description: 'Frame 1',
-            value: 'FRAME_ONE'
-          },
-          {
-            description: 'Frame 2',
-            value: 'FRAME_TWO'
-          },
-          {
-            description: 'Frame 3',
-            value: 'FRAME_THREE'
-          }
-        ],
         others: [
           {
             description: 'Mostrar AA apenas',
@@ -143,10 +164,17 @@
             value: 'COMPLEMENTARY'
           }
         ],
+        direction: [
+          {
+            description: 'Reverso',
+            value: 'REVERSE'
+          }
+        ],
         inputValue: '',
         outputValue: '',
         selectedFrames: [],
         selectedOthers: [],
+        selectedDirection: '',
         outputResponse: ''
       }
     },

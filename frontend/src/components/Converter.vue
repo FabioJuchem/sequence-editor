@@ -58,6 +58,7 @@
             <v-select
               background-color="#FB8C00"
               outlined
+              height="auto"
               label="Outros"
               :items="convertionsOthers"
               attach
