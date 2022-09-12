@@ -70,8 +70,7 @@ export default {
           this.converter = true
         },
         getUserLoggedIn: function() {
-          let token = localStorage.getItem('token')
-          console.log(token)
+          let token = sessionStorage.getItem('token')
           if(token) {
             axios.get('/auth/user', { headers: { 'Authorization': `Bearer ${token}` } })
               .then(resp => {
