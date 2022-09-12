@@ -1,5 +1,6 @@
 package com.fabiojuchem.processorapi.domain.converter.service
 
+import com.fabiojuchem.processorapi.domain.aminoacid.FetchType
 import com.fabiojuchem.processorapi.domain.converter.ConverterType
 import com.fabiojuchem.processorapi.domain.converter.Input
 import com.fabiojuchem.processorapi.domain.converter.Output
@@ -17,8 +18,8 @@ class AminoacidConverterService(
 
     private val logger = LoggerFactory.getLogger(this::class.java)
 
-    fun convertAminoacid(input: Input): Mono<Triple<MutableList<String>, MutableList<String>, MutableList<String>>> {
-       return aminoacidConverter.convert(input)
+    fun convertAminoacid(input: Input, direction: Boolean, options: FetchType): Mono<Triple<String, String, String>> {
+       return aminoacidConverter.convert(input, direction, options)
     }
 
 }

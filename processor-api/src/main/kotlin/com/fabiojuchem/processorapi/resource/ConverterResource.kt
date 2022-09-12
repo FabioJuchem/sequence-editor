@@ -1,6 +1,7 @@
 package com.fabiojuchem.processorapi.resource
 
 import com.fabiojuchem.processorapi.domain.aminoacid.AminoacidOption
+import com.fabiojuchem.processorapi.domain.aminoacid.FetchType
 import com.fabiojuchem.processorapi.domain.converter.ConverterType
 import com.fabiojuchem.processorapi.domain.converter.Input
 import com.fabiojuchem.processorapi.domain.converter.decorators.DecoratorType
@@ -30,7 +31,9 @@ class ConverterResource(
     @PostMapping("/convert/aminoacid", produces = [MediaType.APPLICATION_JSON_VALUE] )
     fun convertAminoacid(
         @RequestBody input: Input,
-    ) = aminoacidConverterService.convertAminoacid(input)
+        @RequestParam direction: Boolean = false,
+        @RequestParam options: FetchType = FetchType.SYMBOL
+    ) = aminoacidConverterService.convertAminoacid(input, direction, options)
 
 
 }

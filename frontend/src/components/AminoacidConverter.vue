@@ -32,7 +32,6 @@
             <v-select class="mr-2"
               background-color="#FB8C00"
               outlined
-              multiple
               deletable-chips
               label="Outros"
               :items="others"
@@ -46,8 +45,6 @@
             <v-select class="mr-2"
               background-color="#FB8C00"
               outlined
-              multiple
-              deletable-chips
               label="Direção"
               :items="direction"
               attach
@@ -138,12 +135,8 @@
 
     methods: {
         convert: function () {
-          axios.post(`/convert/aminoacid`, {value: this.inputValue})
+          axios.post(`/convert/aminoacid?direction=${this.selectedDirection}&options=${this.selectedOther}`, {value: this.inputValue})
           .then((resp) => this.outputResponse =  resp.data)
-        },
-
-        prepareOptions: function () {
-          return this.selectedDirection.concat(this.selectedOthers).join(',')
         },
 
         login: function () {
@@ -156,25 +149,29 @@
       return {
         others: [
           {
-            description: 'Mostrar AA apenas',
-            value: 'REVERSE'
+            description: 'Mostrar simbolo',
+            value: 'SYMBOL'
           },
           {
-            description: 'Mostrar AA + DNA',
-            value: 'COMPLEMENTARY'
+            description: 'Mostrar siglas',
+            value: 'ACRONYM'
           }
         ],
         direction: [
           {
+            description: 'Padrão',
+            value: 'false'
+          },
+          {
             description: 'Reverso',
-            value: 'REVERSE'
+            value: 'true'
           }
         ],
         inputValue: '',
         outputValue: '',
         selectedFrames: [],
-        selectedOthers: [],
-        selectedDirection: '',
+        selectedOther: 'SYMBOL',
+        selectedDirection: false,
         outputResponse: ''
       }
     },

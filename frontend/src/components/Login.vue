@@ -60,7 +60,7 @@
                 this.$emit('userData', this.userData)
               }).finally(() => {
                 this.loading = false
-                localStorage.setItem('token', this.token)
+                sessionStorage.setItem('token', this.token)
               })
           })
           
