@@ -51,10 +51,10 @@
     methods: {
       login: function() {
         this.loading = true
-        axios.post('/auth/login', { username: this.username, password: this.password })
+        axios.post('https://sequence-editor-api.herokuapp.com/auth/login', { username: this.username, password: this.password })
           .then((resp) => {
             this.token = resp.data
-            axios.get('/auth/user', { headers: { 'Authorization': `Bearer ${this.token}` } })
+            axios.get('https://sequence-editor-api.herokuapp.com/auth/user', { headers: { 'Authorization': `Bearer ${this.token}` } })
               .then(resp => {
                 this.userData = { name: resp.data.name, email: resp.data.email, token: this.token }
                 this.$emit('userData', this.userData)

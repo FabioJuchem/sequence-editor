@@ -116,7 +116,7 @@
 
     methods: {
         convert: function (type) {
-          axios.post(`/convert/${type}?options=${this.prepareOptions()}`, {value: this.inputValue})
+          axios.post(`https://sequence-editor-api.herokuapp.com/convert/${type}?options=${this.prepareOptions()}`, {value: this.inputValue})
           .then((resp) => this.outputResponse =  resp.data)
         },
 

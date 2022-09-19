@@ -135,7 +135,7 @@
 
     methods: {
         convert: function () {
-          axios.post(`/convert/aminoacid?direction=${this.selectedDirection}&options=${this.selectedOther}`, {value: this.inputValue})
+          axios.post(`https://sequence-editor-api.herokuapp.com/convert/aminoacid?direction=${this.selectedDirection}&options=${this.selectedOther}`, {value: this.inputValue})
           .then((resp) => this.outputResponse =  resp.data)
         },
 

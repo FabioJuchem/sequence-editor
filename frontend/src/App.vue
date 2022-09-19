@@ -72,7 +72,7 @@ export default {
         getUserLoggedIn: function() {
           let token = sessionStorage.getItem('token')
           if(token) {
-            axios.get('/auth/user', { headers: { 'Authorization': `Bearer ${token}` } })
+            axios.get('https://sequence-editor-api.herokuapp.com/auth/user', { headers: { 'Authorization': `Bearer ${token}` } })
               .then(resp => {
                 this.userData = { name: resp.data.name, email: resp.data.email, token: this.token }
               })
