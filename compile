@@ -26,4 +26,4 @@ echo "       copying work dir from cache $TMP_DIR to build dir $BUILD_DIR"
 cp -R $TMP_DIR/. $BUILD_DIR/
 echo "       cleaning tmp dir $TMP_DIR"
 rm -rf $TMP_DIR
-exit 0
+exit 0 dfgdfgdg
