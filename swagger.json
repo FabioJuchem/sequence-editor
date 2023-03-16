@@ -1,32 +1,3 @@
-Skip to content
-Search or jump to…
-Pull requests
-Issues
-Codespaces
-Marketplace
-Explore
- 
-@FabioJuchemPag 
-tgotwig
-/
-TMF622_ProductOrder
-Public
-forked from tmforum-apis/TMF622_ProductOrder
-Fork your own copy of tgotwig/TMF622_ProductOrder
-Code
-Pull requests
-Actions
-Projects
-Security
-Insights
-TMF622_ProductOrder/Product_Ordering_Management.regular.swagger.json
-@bigludo7
-bigludo7 Update Product_Ordering_Management.regular.swagger.json
-Latest commit ce153b2 on Mar 9, 2018
- History
- 1 contributor
-1462 lines (1460 sloc)  59.2 KB
-
 {
 
     "swagger": "2.0",
@@ -1489,17 +1460,3 @@ Latest commit ce153b2 on Mar 9, 2018
     }
 
 }
-Footer
-© 2023 GitHub, Inc.
-Footer navigation
-Terms
-Privacy
-Security
-Status
-Docs
-Contact GitHub
-Pricing
-API
-Training
-Blog
-About
